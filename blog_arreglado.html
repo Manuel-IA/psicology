@@ -921,7 +921,7 @@
         mostrarPregunta();
     });
 </script>
-</div>
+
   
 
 
@@ -935,6 +935,10 @@
 
             // Mostrar la sección seleccionada
             document.getElementById(pagina).style.display = "block";
+
+            if(pagina === 'conceptos'){
+                window.scrollTo(0, 0);
+            }
         }
     </script>
   
@@ -987,19 +991,49 @@
     <div class="info-card teoria">
         <div class="icon">📘</div>
         <h2>Teoría General de los Sistemas</h2>
-        <p>Estudia cómo los elementos de un sistema se organizan y relacionan para formar un todo funcional.</p>
+        <p>La Teoría General de los Sistemas (TGS) fue propuesta por Ludwig von Bertalanffy con el objetivo de desarrollar un marco interdisciplinario para el estudio de sistemas en diferentes ámbitos. Un sistema se define como un conjunto de elementos interrelacionados que forman un todo organizado.
+          Principios de la Teoría General de los Sistemas:<p>
+<p>Totalidad: Un sistema debe analizarse en su conjunto, no solo en sus partes.<p>
+<p>Interdependencia: Los componentes de un sistema afectan y dependen unos de otros.<p>
+<p>Homeostasis: Capacidad del sistema de mantener estabilidad ante cambios externos.<p>
+<p>Entropía: Tendencia natural del sistema a desordenarse si no recibe energía externa.<p>
+<p>Equifinalidad: Diferentes caminos pueden llevar a un mismo resultado.</p>
     </div>
 
     <div class="info-card cibernetica">
         <div class="icon">🔄</div>
-        <h2>Cibernética de Primer y Segundo Orden</h2>
-        <p>Analiza los mecanismos de control, retroalimentación y autoorganización en los sistemas.</p>
+        <h2>Cibernética</h2>
+        <p>La cibernética es la disciplina que estudia los sistemas de control y comunicación en organismos, máquinas y sociedades. Fue desarrollada por Norbert Wiener y tiene dos grandes enfoques: la cibernética de primer orden y la cibernética de segundo orden.</p>
+        <h2>Cibernética de Primer Orden</h2>
+
+<p>Es el estudio de los sistemas desde una perspectiva externa, considerando que pueden ser modelados y controlados sin que el observador influya en ellos. En este enfoque, el sistema es independiente del observador.
+
+Ejemplo: Un termostato regula la temperatura de una habitación basándose en mediciones sin importar quién lo observe o instale.</p>
+
+<h2>Cibernética de Segundo Orden</h2>
+
+<p>En este enfoque, se reconoce que el observador es parte del sistema y lo afecta con su percepción e interacción. Es decir, el sistema no puede analizarse sin considerar la relación entre el observador y el sistema.
+
+Ejemplo: En terapia familiar, el terapeuta influye en el sistema familiar al interactuar con él y modificar sus dinámicas.</p>
     </div>
 
     <div class="info-card complejidad">
         <div class="icon">🧩</div>
         <h2>Teoría de la Complejidad</h2>
-        <p>Explica cómo surgen propiedades emergentes en sistemas dinámicos y adaptativos.</p>
+        <p>La Teoría de la Complejidad estudia sistemas dinámicos que presentan un alto grado de interconexión y comportamiento emergente. Se basa en la idea de que los sistemas complejos no pueden entenderse solo analizando sus partes, sino que emergen propiedades colectivas que no se encuentran en los elementos individuales.
+        Características de los Sistemas Complejos:</p>
+
+<p>Emergencia: Propiedades globales que surgen de la interacción de las partes</p>
+
+<p>Autoorganización: Capacidad de estructurarse sin una planificación central</p>
+
+<p>No linealidad: Pequeños cambios pueden producir efectos desproporcionados</p>
+
+<p>Adaptabilidad: Capacidad del sistema de responder a cambios en el entorno</p>
+
+<p>Ejemplo: Un mercado financiero es un sistema complejo donde miles de inversores toman decisiones independientes, pero de sus interacciones emergen patrones globales como burbujas económicas o crisis.</p>
+
+
     </div>
 </section>
 
@@ -1029,3 +1063,4 @@
     </section>
 </body>
 </html>
+
