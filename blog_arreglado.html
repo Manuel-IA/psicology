@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Interactivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        /* Estilo del título principal */
+        header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s infinite alternate, gradientMove 6s ease infinite;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(255, 154, 158, 0.7), 0 0 20px rgba(255, 154, 158, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(255, 154, 158, 1), 0 0 30px rgba(255, 154, 158, 0.8); }
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 60%;
+            margin: auto;
+        }
+        .card {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+            transform-style: preserve-3d;
+            position: relative;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card .front, .card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        .card .back {
+            background-color: #2ecc71;
+            transform: rotateY(180deg);
+        }
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+        #mensaje {
+            font-size: 24px;
+            color: green;
+            margin-top: 20px;
+        }
+      
+        /* Estilo del título "Conceptos Claves" */
+        #conceptos-titulo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        #conceptos-titulo:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #2575fc, #6a11cb);
+        }
+
+        .pagina {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Animación para transiciones suaves */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Estilos para los botones de navegación */
+        .nav-link {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            display: inline-block;
+            margin: 15px;
+        }
+
+        .nav-link:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #2575fc, #6a11cb);
+        }
+
+        /* Espacio en blanco para mostrar contenido */
+        #contenido {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    head>
+       body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background: #444;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: inline-block;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        section {
+            padding: 20px;
+            margin: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+      
+    .concepts-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Centra los elementos */
+      gap: 40px; /* Aumenta el espacio entre elementos */
+      padding: 20px;
+      max-width: 1200px; /* Limita el ancho total en pantallas grandes */
+      margin: 0 auto; /* Centra el contenedor en la pantalla */
+      align-content: 1 1 auto;
+}
+
+  .concept {
+      width: 140px;
+      height: 140px;
+      min-width: 140px; /* Asegura que no se encojan demasiado */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 50%;
+      background-color: #add8e6;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      position: relative;
+      transition: transform 0.3s ease-in-out;
+}
+
+    .concept:hover {
+        transform: scale(1.1);
+    }
+
+    .concept .definition {
+        display: none;
+        position: absolute;
+        bottom: 80%; /* Ajuste para que aparezca arriba */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        background: #add8e6;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .concept:hover .definition {
+        display: block;
+        opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+        .concept {
+            width: 80px;
+            height: 80px;
+            font-size: 12px;
+        }
+    }
+    </style>
+  
+    <script>
+        document.querySelectorAll(".concepto").forEach((concepto) => {
+    let definicion = concepto.querySelector(".definicion");
+
+    // Mostrar la definición al pasar el mouse
+    concepto.addEventListener("mouseover", () => {
+        definicion.style.display = "block";
+    });
+
+    // Ocultar la definición al salir solo si no se ha hecho clic
+    concepto.addEventListener("mouseout", () => {
+        if (!definicion.classList.contains("fijado")) {
+            definicion.style.display = "none";
+        }
+    });
+
+ 
+});
+        
+      
+    </script>
+</head>
+<body>
+    <header>
+        <h1>La realidad hace la verdad</h1>
+        <nav>
+            
+    <ul>
+        <li><span class="nav-link" onclick="cambiarPagina('teoria_sistemas')">Teoría General de los Sistemas</span></li>
+        <li><span class="nav-link" onclick="cambiarPagina('cibernetica')">Cibernética</span></li>
+        <li><span class="nav-link" onclick="cambiarPagina('teoria_complejidad')">Teoría de la Complejidad</span></li>
+       <li><span class="nav-link" onclick="cambiarPagina('tipos_sistemas')">Tipos de Sistemas</span></li>
+    </ul>
+</nav>
+
+    </header>
+    
+    <div class="image-container">
+       <img src="https://www.numodi.com/wp-content/uploads/2019/02/Enfoque-sistemico-tecnologia-y-personas.jpg" alt="Imagen representativa de sistemas y tecnología">
+
+    </div>
+
+    <!-- Secciones -->
+    <div id="inicio" class="pagina" style="display: block;">
+        <h2>Bienvenido al Blog Interactivo</h2>
+        <p>Explora los conceptos clave de la teoría de sistemas.</p>
+    </div>
+
+  <div id="tipos_sistemas" class="pagina"">
+    <style>
+    .container {
+        width: 40%;
+        margin: auto;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+    }
+    .draggable {
+        display: inline-block;
+        padding: 6px 10px;
+        margin: 6px;
+        background-color: #3498db;
+        color: white;
+        border-radius: 5px;
+        cursor: grab;
+        font-size: 12px;
+    }
+    .dropzone {
+        display: inline-block;
+        padding: 8px;
+        margin: 6px;
+        background-color: #ecf0f1;
+        border: 2px dashed #bdc3c7;
+        border-radius: 5px;
+        min-width: 130px;
+        min-height: 30px;
+        font-size: 12px;
+    }
+    #concepts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    #definitions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="container">
+    <h1>Juego de Apareamiento de Conceptos</h1>
+    <p>Arrastra cada concepto a su definición correcta</p>
+    <div id="concepts">
+        <div class="draggable" draggable="true" id="open">Sistema Abierto</div>
+        <div class="draggable" draggable="true" id="closed">Sistema Cerrado</div>
+        <div class="draggable" draggable="true" id="real">Sistema Real</div>
+        <div class="draggable" draggable="true" id="artificial">Sistema Artificial</div>
+        <div class="draggable" draggable="true" id="natural">Sistema Natural</div>
+        <div class="draggable" draggable="true" id="discrete">Sistema Discreto</div>
+    </div>
+    <div id="definitions">
+        <div class="dropzone" data-correct="open">Interactúan con el entorno intercambiando materia, energía o información.</div>
+        <div class="dropzone" data-correct="closed">No intercambian materia ni información con el entorno.</div>
+        <div class="dropzone" data-correct="real">Existe de manera objetiva en el mundo real.</div>
+        <div class="dropzone" data-correct="artificial">Creado por el ser humano con un propósito específico.</div>
+        <div class="dropzone" data-correct="natural">Surge de forma espontánea en la naturaleza sin intervención humana.</div>
+        <div class="dropzone" data-correct="discrete">Compuesto por elementos diferenciables y contables.</div>
+    </div>
+    <div id="feedback"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const draggables = document.querySelectorAll(".draggable");
+        const dropzones = document.querySelectorAll(".dropzone");
+        
+        draggables.forEach(item => {
+            item.addEventListener("dragstart", function (event) {
+                event.dataTransfer.setData("text", event.target.id);
+            });
+        });
+        
+        dropzones.forEach(zone => {
+            zone.addEventListener("dragover", function (event) {
+                event.preventDefault();
+            });
+            zone.addEventListener("drop", function (event) {
+                event.preventDefault();
+                const draggedId = event.dataTransfer.getData("text");
+                const draggedElement = document.getElementById(draggedId);
+                
+                if (zone.getAttribute("data-correct") === draggedId) {
+                    zone.appendChild(draggedElement);
+                    draggedElement.style.position = "static";
+                    document.getElementById("feedback").textContent = "¡Correcto!";
+                    document.getElementById("feedback").style.color = "green";
+                } else {
+                    document.getElementById("feedback").textContent = "Incorrecto, intenta de nuevo.";
+                    document.getElementById("feedback").style.color = "red";
+                }
+            });
+        });
+    });
+</script>
+    </div>
+  
+    <div id="conceptos" class="pagina">
+       <style>
+    .visual-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px;
+    }
+    .visual-card {
+        width: 250px;
+        height: 250px;
+        border-radius: 20px;
+        overflow: hidden;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        backdrop-filter: blur(5px);
+    }
+    .title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        margin: 20px 0;
+        text-transform: uppercase;
+        color: #2c3e50;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        font-family: 'Poppins', sans-serif;
+    }
+    .example {
+        font-size: 14px;
+        font-weight: normal;
+        text-align: center;
+        padding: 5px;
+        background-color: rgba(255, 255, 255, 0.9);
+        width: 100%;
+        border-radius: 0 0 20px 20px;
+        font-family: 'Poppins', sans-serif;
+    }
+    .visual-card div:first-child {
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+        border-radius: 20px 20px 0 0;
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
+
+<h2 class="title">Ejemplos Visuales de Conceptos</h2>
+<div class="visual-container">
+    <div class="visual-card" style="background-image: url('https://img.freepik.com/vector-premium/grupo-miembros-familia-extendida-charlando-felizmente-mientras-dirigen-iglesia_216520-115043.jpg');">
+        <div>Circularidad</div>
+        <div class="example">Ejemplo: Una familia donde los comportamientos de cada miembro influyen en los demás.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://images.pexels.com/photos/1778809/pexels-photo-1778809.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+        <div>Conglomeración</div>
+        <div class="example">Ejemplo: Un grupo de personas reunidas en una plaza sin una estructura definida.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/I-80_Eastshore_Fwy.jpg/800px-I-80_Eastshore_Fwy.jpg');">
+        <div>Emergencia</div>
+        <div class="example">Ejemplo: El tráfico en una ciudad que fluye o se congestiona sin que un solo conductor lo controle.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://static.misionesonline.news/wp-content/uploads/2015/03/154.jpg');">
+        <div>Autoorganización</div>
+        <div class="example">Ejemplo: Un enjambre de abejas formando una colmena sin instrucciones externas.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://st2.depositphotos.com/2824873/9848/v/450/depositphotos_98485178-stock-illustration-vector-body-temperature.jpg');">
+        <div>Homeostasis</div>
+        <div class="example">Ejemplo: El cuerpo humano regulando su temperatura interna.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://investiciencias.com/images/imagenes/membranacelular.jpg');">
+        <div>Frontera</div>
+        <div class="example">Ejemplo: Una membrana celular controlando qué sustancias entran y salen.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://live.staticflickr.com/3182/2633376494_af1e5607e3_b.jpg');">
+        <div>Recursividad</div>
+        <div class="example">Ejemplo: Espejos enfrentados reflejándose infinitamente.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://www.caloryfrio.com/images/articulos/regulacion/termostatos.webp');">
+        <div>Retroalimentación</div>
+        <div class="example">Ejemplo: Un termostato ajustando la calefacción de acuerdo a la temperatura ambiente.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://www.biospace.es/wp-content/uploads/arrboles-que-producen-mas-oxigeno.jpg');">
+        <div>Servicio</div>
+        <div class="example">Ejemplo: Un árbol proporcionando sombra y oxígeno a su entorno.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://www.grupotodoplano.com/blog/wp-content/uploads/2020/01/desorden-1.jpg');">
+        <div>Entropía</div>
+        <div class="example">Ejemplo: Una habitación desordenándose con el tiempo si no se mantiene.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://aeromaquinados.com/wp-content/uploads/2025/03/piclumen-1742704226956.webp');">
+        <div>Elemento</div>
+        <div class="example">Ejemplo: Un tornillo dentro de una máquina que contribuye a su función.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://i.pinimg.com/736x/cd/84/1a/cd841ab9fd8eb4583838e16b8deb5ac3.jpg');">
+        <div>Estructura</div>
+        <div class="example">Ejemplo: Un esqueleto proporcionando soporte al cuerpo.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://cl.tiching.com/uploads/contents/2011/07/11/34317_1310362140.png');">
+        <div>Ambiente</div>
+        <div class="example">Ejemplo: Un bosque que influye en la vida de los animales que habitan en él.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://m.media-amazon.com/images/I/91A46B-UEeL._AC_UF350,350_QL80_.jpg');">
+        <div>Sistema</div>
+        <div class="example">Ejemplo: Un reloj compuesto de engranajes que trabajan juntos.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://www.autopista.es/uploads/s1/11/50/63/64/durante-el-proceso-de-la-metamorfosis-intervienen-dos-hormonas.jpeg');">
+        <div>Morfogénesis</div>
+        <div class="example">Ejemplo: Una oruga transformándose en mariposa.</div>
+    </div>
+    <div class="visual-card" style="background-image: url('https://c.files.bbci.co.uk/ACFF/production/_116778244_gettyimages-905514896.jpg');">
+        <div>Morfostasis</div>
+        <div class="example">Ejemplo: Un idioma que conserva sus reglas gramaticales a pesar de la evolución de las palabras.</div>
+    </div>
+</div>
+
+    </div>
+
+    <div id="cibernetica" class="pagina">
+        
+    <style>
+ 
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 60%;
+            margin: auto;
+        }
+        .card {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+            transform-style: preserve-3d;
+            position: relative;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card .front, .card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        .card .back {
+            background-color: #2ecc71;
+            transform: rotateY(180deg);
+        }
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+        #mensaje {
+            font-size: 24px;
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
+
+
+    <h1>Juego de Memoria - Cibernética</h1>
+    <div class="grid" id="grid"></div>
+    <h2 id="mensaje" style="display: none;">¡Ganaste!</h2>
+    <script>
+        const conceptos = [
+            { termino: "Homeostasis", definicion: "Capacidad de un sistema para mantener su equilibrio interno." },
+            { termino: "Retroalimentación", definicion: "Proceso mediante el cual un sistema se autorregula a partir de sus resultados." },
+            { termino: "Cibernética", definicion: "Estudio de los sistemas de control y comunicación en máquinas y seres vivos." },
+            { termino: "Entropía", definicion: "Grado de desorden dentro de un sistema." }
+        ];
+        
+        let pares = [];
+        conceptos.forEach((item) => {
+            pares.push({ value: item.termino, text: item.termino });
+            pares.push({ value: item.termino, text: item.definicion });
+        });
+        
+        let grid = document.getElementById("grid");
+        let seleccionadas = [];
+        let bloqueadas = [];
+        
+        pares.sort(() => Math.random() - 0.5);
+        
+        pares.forEach((item) => {
+            let card = document.createElement("div");
+            card.classList.add("card");
+            card.dataset.value = item.value;
+            
+            let front = document.createElement("div");
+            front.classList.add("front");
+            front.textContent = "?";
+            
+            let back = document.createElement("div");
+            back.classList.add("back");
+            back.textContent = item.text;
+            
+            card.appendChild(front);
+            card.appendChild(back);
+            
+            card.addEventListener("click", () => {
+                if (bloqueadas.includes(card) || seleccionadas.length === 2) return;
+                card.classList.add("flipped");
+                seleccionadas.push({ card, value: item.value });
+                
+                if (seleccionadas.length === 2) {
+                    setTimeout(() => {
+                        if (seleccionadas[0].value === seleccionadas[1].value) {
+                            bloqueadas.push(seleccionadas[0].card, seleccionadas[1].card);
+                            if (bloqueadas.length === pares.length) {
+                                document.getElementById("mensaje").style.display = "block";
+                            }
+                        } else {
+                            seleccionadas[0].card.classList.remove("flipped");
+                            seleccionadas[1].card.classList.remove("flipped");
+                        }
+                        seleccionadas = [];
+                    }, 1000);
+                }
+            });
+            
+            grid.appendChild(card);
+        });
+    </script>
+
+
+    </div>
+
+    <div id="teoria_sistemas" class="pagina">
+       
+    <h2>Trivia: Teoría General de los Sistemas</h2>
+    <div id="pregunta-container">
+        <p id="pregunta-texto"></p>
+        <div id="opciones"></div>
+        <button id="siguiente" style="display: none;">Siguiente</button>
+    </div>
+    <p id="resultado" class="resultado">asldkalskd</p>
+</div>
+
+<style>
+    #trivia {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+    #opciones button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        background: #007BFF;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+    #opciones button:hover {
+        background: #0056b3;
+    }
+    #siguiente {
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    .resultado {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+</style>
+
+<script>
+    const preguntas = [
+        {
+            pregunta: "¿Quién fue el creador de la Teoría General de los Sistemas?",
+            opciones: ["Ludwig von Bertalanffy", "Norbert Wiener", "Herbert Simon"],
+            respuesta: "Ludwig von Bertalanffy"
+        },
+        {
+            pregunta: "¿Qué describe mejor un sistema abierto?",
+            opciones: ["Intercambia energía y materia con su entorno", "No interactúa con el entorno", "Es completamente cerrado"],
+            respuesta: "Intercambia energía y materia con su entorno"
+        },
+        {
+            pregunta: "¿Cuál es un principio clave en la Teoría General de los Sistemas?",
+            opciones: ["La homeostasis", "La entropía negativa", "Ambas"],
+            respuesta: "Ambas"
+        }
+    ];
+
+    let preguntaActual = 0;
+
+    function cargarPregunta() {
+        const contenedor = document.getElementById("pregunta-container");
+        const preguntaTexto = document.getElementById("pregunta-texto");
+        const opcionesDiv = document.getElementById("opciones");
+        const resultado = document.getElementById("resultado");
+        const siguienteBtn = document.getElementById("siguiente");
+        
+        resultado.textContent = "";
+        siguienteBtn.style.display = "none";
+        
+        preguntaTexto.textContent = preguntas[preguntaActual].pregunta;
+        opcionesDiv.innerHTML = "";
+        
+        preguntas[preguntaActual].opciones.forEach(opcion => {
+            const btn = document.createElement("button");
+            btn.textContent = opcion;
+            btn.onclick = () => verificarRespuesta(opcion, btn);
+            opcionesDiv.appendChild(btn);
+        });
+    }
+
+    function verificarRespuesta(opcion, boton) {
+        const resultado = document.getElementById("resultado");
+        const botones = document.querySelectorAll("#opciones button");
+        botones.forEach(btn => btn.disabled = true);
+        
+        if (opcion === preguntas[preguntaActual].respuesta) {
+            resultado.textContent = "¡Correcto!";
+            resultado.style.color = "green";
+            boton.style.background = "#28a745";
+        } else {
+            resultado.textContent = "Incorrecto. La respuesta era: " + preguntas[preguntaActual].respuesta;
+            resultado.style.color = "red";
+            boton.style.background = "#dc3545";
+        }
+        
+        document.getElementById("siguiente").style.display = "block";
+    }
+
+    document.getElementById("siguiente").addEventListener("click", () => {
+        preguntaActual++;
+        if (preguntaActual < preguntas.length) {
+            cargarPregunta();
+        } else {
+            document.getElementById("pregunta-container").innerHTML = "<h3>¡Trivia finalizada!</h3>";
+        }
+    });
+    
+    cargarPregunta();
+</script>
+
+<div id="teoria_complejidad" class="pagina">
+    <div class="container">
+        <h1>Juego de Verdadero o Falso</h1>
+        <p id="pregunta"></p>
+        <button id="verdadero">Verdadero</button>
+        <button id="falso">Falso</button>
+        <p id="resultado_complejidad"></p>
+        <button id="siguiente" class="hidden">Siguiente</button>
+        <p id="puntaje" class="hidden"></p>
+    </div>
+</div>
+
+<style>
+    .container {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+        color: #333;
+    }
+    p {
+        font-size: 18px;
+        color: #555;
+    }
+    button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        margin: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .hidden {
+        display: none;
+    }
+    #resultado {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+    #puntaje {
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 20px;
+        color: #28a745;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const preguntas = [
+            { pregunta: "La teoría de la complejidad estudia sistemas lineales simples.", respuesta: false },
+            { pregunta: "Los sistemas complejos pueden adaptarse y evolucionar con el tiempo.", respuesta: true },
+            { pregunta: "Los sistemas caóticos nunca pueden ser predecibles, incluso con información completa.", respuesta: true },
+            { pregunta: "La complejidad se basa en la interacción de múltiples elementos interconectados.", respuesta: true },
+            { pregunta: "Un sistema complejo se comporta de manera idéntica aunque cambie una sola variable.", respuesta: false }
+        ];
+        
+        let indice = 0;
+        let puntaje = 0;
+
+        const preguntaEl = document.getElementById("pregunta");
+        const resultadoEl = document.getElementById("resultado_complejidad");
+        const siguienteBtn = document.getElementById("siguiente");
+        const puntajeEl = document.getElementById("puntaje");
+        const btnVerdadero = document.getElementById("verdadero");
+        const btnFalso = document.getElementById("falso");
+        
+        function mostrarPregunta() {
+            preguntaEl.textContent = preguntas[indice].pregunta;
+            resultadoEl.textContent = "";
+            siguienteBtn.classList.add("hidden");
+            btnVerdadero.disabled = false;
+            btnFalso.disabled = false;
+        }
+
+        function responder(respuesta) {
+            if (respuesta === preguntas[indice].respuesta) {
+                resultadoEl.style.color = "green";
+                resultadoEl.textContent = "¡Correcto!";
+                puntaje++;
+            } else {
+                resultadoEl.style.color = "red";
+                resultadoEl.textContent = "Incorrecto.";
+            }
+            siguienteBtn.classList.remove("hidden");
+            btnVerdadero.disabled = true;
+            btnFalso.disabled = true;
+            setTimeout(() => {
+                siguientePregunta();
+            }, "1000");
+        }
+
+        function siguientePregunta() {
+            indice++;
+            if (indice < preguntas.length) {
+                mostrarPregunta();
+            } else {
+                preguntaEl.textContent = "Juego terminado.";
+                resultadoEl.textContent = "Tu puntaje: " + puntaje + " / " + preguntas.length;
+                resultadoEl.style.color = "#28a745";
+                siguienteBtn.textContent = "Reiniciar";
+                siguienteBtn.onclick = reiniciarJuego;
+            }
+        }
+
+        function reiniciarJuego() {
+            indice = 0;
+            puntaje = 0;
+            siguienteBtn.textContent = "Siguiente";
+            siguienteBtn.onclick = siguientePregunta;
+            //Evitar error al terminar juego
+            btnVerdadero.disabled = true;
+            btnFalso.disabled = true;
+            mostrarPregunta();
+        }
+
+        btnVerdadero.addEventListener("click", () => responder(true));
+        btnFalso.addEventListener("click", () => responder(false));
+        siguienteBtn.addEventListener("click", siguientePregunta);
+        
+        mostrarPregunta();
+    });
+</script>
+</div>
+  
+
+
+
+  
+  <script>
+        function cambiarPagina(pagina) {
+            // Ocultar todas las secciones
+            let paginas = document.querySelectorAll(".pagina");
+            paginas.forEach(pag => pag.style.display = "none");
+
+            // Mostrar la sección seleccionada
+            document.getElementById(pagina).style.display = "block";
+        }
+    </script>
+  
+<style>
+    .section-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px;
+    }
+
+    .info-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 350px;
+        text-align: center;
+        transition: transform 0.3s;
+    }
+
+    .info-card:hover {
+        transform: scale(1.05);
+    }
+
+    .info-card h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .icon {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .teoria { border-top: 5px solid #3498db; } /* Azul */
+    .cibernetica { border-top: 5px solid #e74c3c; } /* Rojo */
+    .complejidad { border-top: 5px solid #2ecc71; } /* Verde */
+
+    @media (max-width: 768px) {
+        .section-container {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+<section class="section-container">
+    <div class="info-card teoria">
+        <div class="icon">📘</div>
+        <h2>Teoría General de los Sistemas</h2>
+        <p>Estudia cómo los elementos de un sistema se organizan y relacionan para formar un todo funcional.</p>
+    </div>
+
+    <div class="info-card cibernetica">
+        <div class="icon">🔄</div>
+        <h2>Cibernética de Primer y Segundo Orden</h2>
+        <p>Analiza los mecanismos de control, retroalimentación y autoorganización en los sistemas.</p>
+    </div>
+
+    <div class="info-card complejidad">
+        <div class="icon">🧩</div>
+        <h2>Teoría de la Complejidad</h2>
+        <p>Explica cómo surgen propiedades emergentes en sistemas dinámicos y adaptativos.</p>
+    </div>
+</section>
+
+      
+    <section id="conceptos">
+        <!-- Título de "Conceptos Claves" -->
+    <h2    <span class="nav-link" onclick="cambiarPagina('conceptos')">Ejemplos de los Conceptos Claves</span></h2>
+
+        <div class="concepts-container">
+            <div class="concept" >Circularidad<div class="definition">Es el principio según el cual los elementos de un sistema se influyen mutuamente en ciclos de retroalimentación, en lugar de seguir una causa-efecto lineal.</div></div>
+            <div class="concept" >Conglomeración<div class="definition">Es la agrupación de elementos diversos sin una estructura específica, pero que pueden influenciarse entre sí.</div></div>
+            <div class="concept" >Emergencia<div class="definition">Propiedades o comportamientos nuevos que surgen en un sistema y que no pueden explicarse solo por la suma de sus partes.</div></div>
+            <div class="concept" >Autoorganización<div class="definition">Capacidad de un sistema para estructurarse y ordenarse sin una autoridad central.</div></div>
+            <div class="concept" >Homeostasis<div class="definition">La capacidad de un sistema para mantener su equilibrio interno a pesar de los cambios externos.</div></div>
+            <div class="concept" >Frontera<div class="definition">Límite que separa un sistema de su entorno, regulando qué entra y qué sale.</div></div>
+            <div class="concept" >Recursividad<div class="definition">Proceso en el que un sistema se aplica a sí mismo repetidamente a diferentes escalas.</div></div>
+            <div class="concept" >Retroalimentación<div class="definition">Mecanismo mediante el cual la salida de un sistema influye en su propia operación. Puede ser positiva o negativa.</div></div>
+            <div class="concept" >Servicio<div class="definition">Función que un sistema o sus elementos brindan a otros para mantener su funcionamiento.</div></div>
+            <div class="concept" >Entropía<div class="definition">Medida del desorden o la tendencia al caos en un sistema.</div></div>
+            <div class="concept" >Elemento<div class="definition">Parte fundamental de un sistema que interactúa con otros elementos para formar un todo.</div></div>
+            <div class="concept" >Estructura<div class="definition">La forma y organización de los elementos dentro de un sistema.</div></div>
+            <div class="concept" >Ambiente<div class="definition">El entorno externo que influye en un sistema y con el que interactúa.</div></div>
+            <div class="concept" >Sistema<div class="definition">Un conjunto de elementos interconectados que funcionan como un todo para cumplir un propósito.</div></div>
+            <div class="concept" >Morfogénesis<div class="definition">Capacidad de un sistema para cambiar su estructura y evolucionar.</div></div>
+            <div class="concept" >Morfostasis<div class="definition">Proceso mediante el cual un sistema mantiene su estructura sin cambios significativos.</div></div>
+        </div>
+    </section>
+</body>
+</html>
